@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Header from '@/components/Header'
 import {
   Vuetify,
   VApp,
@@ -16,6 +17,8 @@ import {
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
+
+Vue.component('app-header', Header)
 
 Vue.use(Vuetify, {
   components: {

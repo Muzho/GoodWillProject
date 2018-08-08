@@ -1,4 +1,4 @@
-/* const mysql = require('mysql')
+const mysql = require('mysql')
 
 // creating connection
 const db = mysql.createPool({
@@ -6,7 +6,7 @@ const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
   password: '',
-  database: 'akalimu',
+  database: 'goodwill',
   bigNumberStrings: true,
   dateStrings: true,
   trace: true,
@@ -22,9 +22,9 @@ db.getConnection((err, connection) => {
   } else {
     console.log('Database connection Successfully, id : ' +connection.threadId);
   }
-}) */
+})
 
 module.exports = {
-  port: 10001 // ,
-  // db
+  port: 10001,
+  db
 }
