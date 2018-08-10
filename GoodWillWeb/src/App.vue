@@ -28,20 +28,25 @@ export default {
   /* @font-face {
       font-family: Montserrat;
       src: url('../src/assets/fonts/Montserrat/Montserrat-Medium.ttf');
-  }
+  } */
   @font-face {
       font-family: Montserrat;
       src: url('../src/assets/fonts/Montserrat/Montserrat-Medium.ttf');
-  } */
-  @font-face {
+  }
+  /* @font-face {
       font-family: Lato;
       src: url('../src/assets/fonts/Lato/Lato-Regular.ttf');
   }
+  /* @font-face {
+      font-family: Muli;
+      src: url('../src/assets/fonts/Muli/Muli-Regular.ttf');
+  } */
 
   #app{
+    font-family: 'Montserrat', sans-serif;
     /* font-family: 'Montserrat', sans-serif;
-    font-family: 'Montserrat', sans-serif; */
-    font-family: 'Lato', sans-serif;
+    font-family: 'Muli', sans-serif;
+    font-family: 'Lato', sans-serif;*/
     /* margin: 0; */
   }
   .footer {
