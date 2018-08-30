@@ -1,13 +1,12 @@
 <template>
   <v-app id="app">
     <app-header></app-header>
-    <v-content class="mt-2">
-      <!-- <router-view/> -->
-      <router-view></router-view>
+    <v-content>
+      <v-container class="container" fluid>
+        <router-view></router-view>
+      </v-container>
     </v-content>
-    <v-footer :fixed="fixed" app class="footer">
-      <span>&copy; {{ new Date().getFullYear() }} {{ companyBrand }}</span>
-    </v-footer>
+    <app-footer></app-footer>
   </v-app>
 </template>
 
@@ -15,7 +14,6 @@
 export default {
   data () {
     return {
-      fixed: true,
       companyBrand: 'GoodWill'
     }
   },
@@ -49,8 +47,10 @@ export default {
     font-family: 'Lato', sans-serif;*/
     /* margin: 0; */
   }
-  .footer {
-  	margin-bottom: 0%;
-  	padding: 2%;
+  .container {
+    padding: 0!important
+  }
+  a {
+    text-decoration: none;
   }
 </style>

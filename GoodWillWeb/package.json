@@ -14,9 +14,16 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.2",
+    "@fortawesome/free-brands-svg-icons": "^5.2.0",
+    "@fortawesome/free-regular-svg-icons": "^5.2.0",
+    "@fortawesome/free-solid-svg-icons": "^5.2.0",
+    "@fortawesome/vue-fontawesome": "^0.1.1",
     "@okta/okta-vue": "^1.0.1",
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "chart.js": "^2.7.2",
+    "material-design-icons-iconfont": "^3.0.3",
     "moment": "^2.22.2",
     "pusher-js": "^4.2.2",
     "vue": "^2.5.2",
