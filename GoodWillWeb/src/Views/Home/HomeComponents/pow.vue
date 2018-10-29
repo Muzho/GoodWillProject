@@ -5,7 +5,9 @@
         <h2 class="mb-4 primary--text">Properties of the week</h2>
       </v-flex>
       <v-flex xs6 text-xs-right>
-        <router-link :to="'/'" exact>View more ...</router-link>
+        <router-link :to="'/'" exact>
+          Show all ({{pows.length}}) <v-icon color="primary">navigate_next</v-icon>
+        </router-link>
       </v-flex>
     </v-layout>
 
@@ -14,7 +16,7 @@
         <v-card height="100%" hover v-bind:to="'/'" exact>
           <v-card-media
             :src="pow.propImg"
-            height="200px"
+            height="160px"
           ></v-card-media>
           <v-card-title class="pb-0" primary-title>
             <span>{{ pow.propTitle }} in {{ pow.propArea }}, {{ pow.city }}</span>

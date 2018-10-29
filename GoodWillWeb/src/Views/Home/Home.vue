@@ -2,12 +2,12 @@
   <v-container fluid>
     <Jumbotron></Jumbotron>
     <v-layout px-2>
-      <v-container mt-5>
+      <v-container my-5>
         <pow v-bind:pows="pows"></pow>
-        <pos></pos>
-        <por v-bind:pors="pows"></por>
-        <newDev></newDev>
-        <com></com>
+        <pos v-bind:poss="pos"></pos>
+        <por v-bind:pors="pors"></por>
+        <!-- <newDev></newDev>
+        <com></com> -->
       </v-container>
     </v-layout>
   </v-container>
@@ -20,6 +20,7 @@
   import pos from './HomeComponents/pos'
   import por from './HomeComponents/por'
   import com from './HomeComponents/com'
+  import PropService from '@/Services/Home/HomeService'
   export default {
     components: {
       'Jumbotron': Jumbotron,
@@ -31,30 +32,38 @@
     },
     data () {
       return {
-        pows: [
-          {
-            'id': '1',
-            'propImg': '/static/img/images/architecture-construction-daylight-534228.jpg',
-            'propTitle': 'Pent house',
-            'propArea': 'Nakulabye',
-            'propCat': 'Sale',
-            'amount': '120,000,000',
-            'bedrooms': '5',
-            'bathrooms': '3',
-            'city': 'Kampala'
-          },
-          {
-            'id': '2',
-            'propImg': 'http://localhost:8080/static/img/Images/architecture-construction-daylight-534228.jpg',
-            'propTitle': 'Bungalow',
-            'propCat': 'Rent',
-            'propArea': 'Muyonyo',
-            'amount': '1,200,000',
-            'bedrooms': '2',
-            'bathrooms': '3',
-            'city': 'Kampala'
+        pows: [],
+        pors: [],
+        pos: [],
+        propa: []
+      }
+    },
+    created () {
+      this.properties()
+    },
+    mounted () {
+      this.properties()
+    },
+    methods: {
+      async properties () {
+        const response = await PropService.properties()
+        // this.statsCalculator(response.data.lands)
+        let rentals = []
+        let sales = []
+        if (response) {
+          if (response.data.success) {
+            for (let i = 0; i < response.data.lands.length; i++) {
+              if (response.data.lands[i].category === 'Rent') {
+                rentals.push(response.data.lands[i])
+              }
+              if (response.data.lands[i].category === 'Sale') {
+                sales.push(response.data.lands[i])
+              }
+            }
+            this.pors = rentals
+            this.pos = sales
           }
-        ]
+        }
       }
     }
   }

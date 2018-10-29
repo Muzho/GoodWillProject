@@ -26,5 +26,8 @@ db.getConnection((err, connection) => {
 
 module.exports = {
   port: 10001,
-  db
+  db,
+  authentication: {
+    jwtSecret: process.env.JWT_SECRET || 'secret'
+  }
 }

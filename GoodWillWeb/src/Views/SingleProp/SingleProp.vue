@@ -1,7 +1,7 @@
 <template>
   <div class="singleProp">
     <PropJumbotron></PropJumbotron>
-    <v-container mt-3 grid-list-md>
+    <v-container mt-3 mb-5 grid-list-md>
       <app-breadcrumb v-bind:items="pages"></app-breadcrumb>
       <v-layout row wrap>
         <v-flex xs12 sm7 md8>
@@ -59,7 +59,7 @@
           },
           {
             text: 'Property',
-            pageUrl: '/',
+            pageUrl: '',
             disabled: true
           }
         ],

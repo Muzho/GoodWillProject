@@ -8,9 +8,16 @@
   >
   <!--  -->
     <v-container fill-height>
-      <v-layout align-center>
-        <v-flex text-xs-center>
+      <v-layout pa-5 align-center>
+        <v-flex pa-5 xs12>
           <h1>Your Finest Property Masters</h1>
+          <v-text-field
+            v-model="search"
+            solo-inverted
+            round
+            box
+            clearable value="try Ibiza"
+          ></v-text-field>
         </v-flex>
       </v-layout>
     </v-container>
@@ -20,7 +27,9 @@
 <script>
   export default {
     data: () => ({
-      gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)'
+      gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
+      search: '',
+      location: 'Mbarara'
     })
   }
 </script>

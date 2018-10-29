@@ -14,15 +14,21 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "@okta/okta-vue": "^1.0.2",
     "axios": "^0.18.0",
     "moment": "^2.22.2",
     "pusher-js": "^4.3.0",
     "vue": "^2.5.2",
+    "vue-carousel": "^0.16.0-rc1",
     "vue-chartjs": "^3.4.0",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.0"
+    "vuetify": "^1.0.0",
+    "vuex": "^3.0.1",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.3.1",
+    "@mdi/font": "^2.7.94",
     "autoprefixer": "^7.1.5",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
@@ -68,6 +74,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.31",
     "karma-webpack": "^2.0.5",
+    "material-design-icons-iconfont": "^3.0.3",
     "mocha": "^4.0.1",
     "nightwatch": "^1.0.10",
     "opn": "^5.1.0",

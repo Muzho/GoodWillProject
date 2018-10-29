@@ -3,6 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import { sync } from 'vuex-router-sync'
+import store from '@/store/store'
+import Axios from 'axios'
+import VueCarousel from 'vue-carousel'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
+import '@fortawesome/fontawesome-free/css/all.css' // Ensure you are using css-loader
+import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
+import BreadCrumb from '@/components/BreadCrumb'
+import Messages from '@/components/Messages'
 import {
   Vuetify,
   VApp,
@@ -13,10 +24,43 @@ import {
   VIcon,
   VGrid,
   VToolbar,
+  VJumbotron,
+  VCard,
+  VTabs,
+  VForm,
+  VTextField,
+  VBreadCrumbs,
+  VAlert,
+  VMenu,
+  VDatePicker,
+  VSelect,
+  VAutocomplete,
+  VDivider,
+  VStepper,
+  VDialog,
+  VDataTable,
+  VBadge,
+  VResponsive,
+  VCombobox,
+  VTextarea,
+  VImg,
+  VExpansionPanel,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 
+Vue.component('app-header', Header)
+Vue.component('app-footer', Footer)
+Vue.component('app-breadcrumb', BreadCrumb)
+Vue.component('app-feedback', Messages)
+
+Vue.prototype.$http = Axios
+const token = localStorage.getItem('token')
+if (token) {
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+}
+
+Vue.use(VueCarousel)
 Vue.use(Vuetify, {
   components: {
     VApp,
@@ -27,10 +71,32 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
+    VJumbotron,
+    VCard,
+    VTabs,
+    VForm,
+    VTextField,
+    VBreadCrumbs,
+    VAlert,
+    VMenu,
+    VDatePicker,
+    VSelect,
+    VAutocomplete,
+    VDivider,
+    VStepper,
+    VDialog,
+    VDataTable,
+    VBadge,
+    VResponsive,
+    VCombobox,
+    VTextarea,
+    VImg,
+    VExpansionPanel,
     transitions
   },
   theme: {
-    primary: '#ee44aa',
+    /* primary: '#ee44aa', */
+    primary: '#E91E63',
     secondary: '#424242',
     accent: '#82B1FF',
     error: '#FF5252',
@@ -42,10 +108,14 @@ Vue.use(Vuetify, {
 
 Vue.config.productionTip = false
 
+sync(store, router)
+
 /* eslint-disable no-new */
 new Vue({
+  iconfont: 'fa',
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
