@@ -6,5 +6,14 @@ export default {
   },
   Login (credentials) {
     return Api().post('userLogin', credentials)
+  },
+  editUserProfile (credentials) {
+    return Api().post('editUserProfile', credentials)
+  },
+  changeUsername (credentials) {
+    return Api().post('changeUsername', credentials)
+  },
+  changeUserPassword (credentials) {
+    return Api().post('changeUserPassword', credentials)
   }
 }

@@ -94,7 +94,7 @@
                     label="Search"
                     single-line
                     hide-details
-                    solo-inverted                    
+                    solo-inverted
                   ></v-text-field>
                 </v-card-title>
                 <v-data-table
@@ -256,8 +256,7 @@
         editOwner_dialog: false,
         nameRule: [(v) => !!v || 'Property title required'],
         contactRule: [
-          (v) => !!v || 'Contact required',
-          (v) => /^0[347]{1}[0-9]{2}[0-9]{6}$/.test(v) || 'Invalid phone number'
+          (v) => !!v || 'Contact required'
         ],
         LincenseNumberRule: [(v) => !!v || 'Lincense number required'],
         emailRule: [(v) => !!v || 'Email required'],
@@ -276,23 +275,21 @@
     },
     watch: {
       old_name: function (name) {
-        if (name.toUpperCase() === this.new_name && this.old_ownership === this.new_ownership && this.old_contact === this.new_contact) {
+        if (name.toUpperCase() === this.new_name && this.old_ownership === this.new_ownership && this.old_contact.toString() === this.new_contact) {
           this.ownerEdit_valid = true
         } else {
           this.ownerEdit_valid = false
         }
       },
       old_contact: function (contact) {
-        if (contact === this.new_contact && this.old_ownership === this.new_ownership && this.old_name === this.new_name) {
+        if (contact.toString() === this.new_contact && this.old_ownership === this.new_ownership && this.old_name === this.new_name) {
           this.ownerEdit_valid = true
-          console.log(contact)
-          // console.log(this.new_contact)
         } else {
           this.ownerEdit_valid = false
         }
       },
       old_ownership: function (ownership) {
-        if (ownership === this.new_ownership && this.old_name === this.new_name && this.old_contact === this.new_contact) {
+        if (ownership === this.new_ownership && this.old_name === this.new_name && this.old_contact.toString() === this.new_contact) {
           this.ownerEdit_valid = true
         } else {
           this.ownerEdit_valid = false
@@ -350,7 +347,7 @@
         this.old_name = owner.name.toUpperCase()
         this.new_name = owner.name.toUpperCase()
         this.old_contact = owner.contact
-        this.new_contact = owner.contact
+        this.new_contact = owner.contact.toString()
         this.old_ownership = owner.ownership
         this.new_ownership = owner.ownership
         this.editOwner_dialog = true

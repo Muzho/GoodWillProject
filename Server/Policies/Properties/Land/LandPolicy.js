@@ -5,12 +5,13 @@ module.exports = {
     let landErrors = [] // joi.string().uri().trim().required()
 		// Joi.string().regex(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/).required()
 		// (http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)
+		// address -> [a-zA-Z0-9\s,.'-]{3,}$
 		// facilities: Joi.array().items(Joi.string(), Joi.number()).single()
 		// regex(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+(?:jpg|gif|png)+$/)
 		const schema = {
 			title: Joi.string().regex(/^[a-zA-Z0-9 ]+$/).required(),
-      address: Joi.string().regex(/^[a-zA-Z0-9\-/. ]+$/).required(),
-      details: Joi.string().regex(/^[a-zA-Z0-9/.\- ]+$/).required(),
+      address: Joi.string().regex(/^[a-zA-Z0-9\s,.'-]{3,}$/).required(),
+      details: Joi.string().regex(/^[a-zA-Z0-9/.\-, ]+$/).required(),
 			propType: Joi.number().integer().min(1).required(),
 			category: Joi.number().integer().min(1).required(),
 			location: Joi.number().integer().min(1).required(),

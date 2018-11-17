@@ -13,7 +13,8 @@
 export default {
   data () {
     return {
-      companyBrand: 'GoodWill'
+      companyBrand: 'GoodWill',
+      swiperType: 'Easy Vertical Swiper'
     }
   },
   name: 'App',
@@ -55,6 +56,9 @@ export default {
     font-family: 'Muli', sans-serif;
     font-family: 'Lato', sans-serif;*/
     /* margin: 0; */
+    /* display: flex;
+    align-items: center;
+    flex-direction: column; */
   }
   .container {
     padding: 0!important

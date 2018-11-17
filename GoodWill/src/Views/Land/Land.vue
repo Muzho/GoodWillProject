@@ -37,7 +37,7 @@
             <v-layout row wrap mt-4>
               <v-flex xs12 sm8 md8></v-flex>
               <v-flex xs12 sm4 md4 class="text-md-right text-sm-right">
-                <v-dialog v-model="add_landDialog" persistent>
+                <v-dialog v-model="add_landDialog" persistent max-width="800px">
                   <v-btn round slot="activator" class="p-btn" color="primary" dark>
                     <!-- <v-icon dark left>control_point</v-icon> -->
                     Add Land Property
@@ -264,7 +264,23 @@
               </v-flex>
 
               <v-flex xs12 class="mt-5" v-if="laProperties.length > 0">
-                <!-- <propCarousel :propTypes="propTypes"></propCarousel> -->
+                <!-- <propSwiper :propTypes="propTypes"></propSwiper> -->
+                <!-- <swiper :options="swiperOption">
+                  <!- slides ->
+                  <swiper-slide v-for="propType in propTypes" :key="propType.prop_id">
+                    <!- <propCarousel :title="propType.type"></propCarousel> ->
+                    <v-layout row wrap>
+                      <v-flex xs6 sm2>
+                        <h3>propType.type</h3>
+                      </v-flex>
+                    </v-layout>
+                  </swiper-slide> ->
+
+                  <!- Optional controls -->
+                  <!-- <div class="swiper-pagination"  slot="pagination"></div> ->
+                  <div class="swiper-button-prev" slot="button-prev"></div>
+                  <div class="swiper-button-next" slot="button-next"></div>
+                </swiper> -->
                 <v-layout row wrap mb-4>
                   <v-flex xs12 mb-3>
                     <h3>Sort By:</h3>
@@ -393,10 +409,16 @@
   import imgUploadService from '@/Services/img_uploadService'
   import landstats from './LandsComponents/LandStats'
   import propCarousel from './LandsComponents/PropCarousel'
+  import propSwiper from './LandsComponents/PropSwiper'
+  import 'swiper/dist/css/swiper.css'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
   export default {
     components: {
       'landstats': landstats,
-      'propCarousel': propCarousel
+      'propCarousel': propCarousel,
+      'propSwiper': propSwiper,
+      swiper,
+      swiperSlide
     },
     data () {
       return {
@@ -413,6 +435,21 @@
             disabled: true
           }
         ],
+        swiperOption: {
+          direction: 'vertical',
+          slidesPerView: 5,
+          spaceBetween: 0,
+          freeMode: true,
+          loop: true,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets'
+          }
+        },
         e1: 0,
         properties: [],
         propers: [],
@@ -656,22 +693,22 @@
           if (properties[i].category === 'Rent') {
             rent = rent + 1
           }
-          if (properties[i].type === 'Plots And Land') {
+          if (properties[i].type === 'Land') {
             land = land + 1
           }
-          if (properties[i].type === 'Houses') {
+          if (properties[i].type === 'House') {
             houses = houses + 1
           }
-          if (properties[i].type === 'Apartments') {
+          if (properties[i].type === 'Apartment') {
             apartments = apartments + 1
           }
-          if (properties[i].type === 'Offices') {
+          if (properties[i].type === 'Office') {
             offices = offices + 1
           }
-          if (properties[i].type === 'Ware Houses') {
+          if (properties[i].type === 'Ware House') {
             wareHouses = wareHouses + 1
           }
-          if (properties[i].type === 'Space To Let') {
+          if (properties[i].type === 'Space to let') {
             spaceToLet = spaceToLet + 1
           }
         }
@@ -707,6 +744,7 @@
       async PropertyTypes () {
         const response = await WhenNeededService.PropertyTypes()
         this.propTypes = response.data.property_types
+        // console.log('a: ' + this.propTypes)
       },
       handleFileUpload () {
         this.imagePreview.propFile = this.$refs.propertyImage.files[0]
@@ -828,11 +866,13 @@
                         this.laProperties = response.data.lands
                         this.success = response.data.message
                         this.statsCalculator(response.data.lands)
-                      } else {
+                      } else if (response.data.success === false) {
                         if (response.data.error_type === 0) {
-                          this.addLand_error = propImagesResponse.data.error[0]
+                          this.addLand_error = response.data.error[0]
+                          console.log(response.data.error[0])
                         } else if (response.data.error_type === 1) {
-                          this.addLand_error = propImagesResponse.data.error
+                          this.addLand_error = response.data.error
+                          console.log(response.data.error)
                         } else {
                           this.addLand_error = 'Error !!!'
                         }
@@ -867,6 +907,14 @@
 <style scoped>
   h1, h2 {
     font-weight: normal;
+  }
+  .swiper-slide{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .swiper-container {
+    height : 150px;
   }
   .errorMessage {
     color: red;

@@ -41,7 +41,7 @@ module.exports = {
 				let files_urls = []
 
 				for(let i = 0; i < req.files.length; i++){
-					files_urls.push('http://localhost:10001/Uploads/Others' + req.files[i].filename)
+					files_urls.push('http://localhost:10001/Uploads/Others/' + req.files[i].filename)
 				}
 
 				res.send({

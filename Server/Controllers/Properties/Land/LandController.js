@@ -108,13 +108,15 @@ module.exports = {
 								}
 
                 //query new data to update the frontend/client
-								let lands = `SELECT ?? AS prop_id,
+								let lands = `SELECT ?? AS prop_id, ?? AS owner,
 								?? AS title, ?? AS img, ?? AS price,
 								?? AS location, ?? AS type, ?? AS category
 								FROM ?? INNER JOIN ?? ON ?? = ??
 								INNER JOIN ?? ON ?? = ??
 								INNER JOIN ?? ON ?? = ??`
-								db.db.query(lands, ['property.Property_Id', 'property.PropertyName',
+								db.db.query(lands, ['property.Property_Id',
+								'property.PropertyOwner',
+								'property.PropertyName',
 								'property.propImage',
 								'property.PropertyPrice', 'area.AreaName',
 								'propertytype.PropertyTypeName', 'propertycategory.CategoryName',
@@ -227,12 +229,14 @@ module.exports = {
 		} */
 	},
 	async Lands (req, res) {
-		let lands = `SELECT ?? AS prop_id, ?? AS title, ?? AS img, ?? AS price,
+		let lands = `SELECT ?? AS prop_id, ?? AS owner, ?? AS title, ?? AS img, ?? AS price,
 		?? AS location, ?? AS type, ?? AS category
 		FROM ?? INNER JOIN ?? ON ?? = ??
 		INNER JOIN ?? ON ?? = ??
 		INNER JOIN ?? ON ?? = ??`
-		db.db.query(lands, ['property.Property_Id', 'property.PropertyName',
+		db.db.query(lands, ['property.Property_Id',
+		'property.PropertyOwner',
+		'property.PropertyName',
 		'property.propImage',
 		'property.PropertyPrice', 'area.AreaName',
 		'propertytype.PropertyTypeName', 'propertycategory.CategoryName',
