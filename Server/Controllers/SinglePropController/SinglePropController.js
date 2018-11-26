@@ -40,10 +40,24 @@ module.exports = {
           error:'error ocurred' + err
         })
       } else {
-        res.send({
-          success: true,
-          property: rows[0]
-        })
+				let locDetails = `SELECT ?? AS property, ?? AS type, ?? AS category,
+				?? AS area, ?? AS areaID, ??	AS city,
+				?? AS cityID, ?? AS region, ??	AS regionID FROM  ?? t1
+				INNER JOIN ?? t2 ON t1.PropertyLocation = t2.Area_Id
+				INNER JOIN ?? t3 ON t2.AreaCity = t3.City_Id
+				INNER JOIN ?? t4 ON t3.CityRegion = t4.Region_Id
+				WHERE t1.Property_Id = ?`
+
+				db.db.query(locDetails, ['PropertyName', 'PropertyType', 'PropertyCategory', 'AreaName',
+				'PropertyLocation', 'CityName', 'AreaCity',
+				'RegionName', 'CityRegion', 'property', 'area', 'city', 'region', propID], (err, results) => {
+					if (err) throw err
+					res.send({
+	          success: true,
+	          property: rows[0],
+						locDetails: results[0]
+	        })
+				})
       }
     })
 	},

@@ -156,5 +156,29 @@ module.exports = {
 				message: 'An error occured while editing region.'
 			})
 		}
+	},
+	async regionProperties (req, res) {
+		const region = req.params.regionID
+		try {
+			// get all cities in a region
+			let cities = `SELECT ?? FROM ?? WHERE ?? = ?`
+			db.db.query(cities, ['City_Id', 'city', 'CityRegion', region], (err, results) => {
+				if (err) throw err
+				let regionCities = []
+				for (i = 0; i < results.length; i++) {
+					regionCities.push(results[i].City_Id)
+				}
+				res.send({
+					success: true,
+					cities: regionCities
+				})
+			})
+		} catch (error) {
+			res.send({
+				success: false,
+				error: error,
+				error_type: 3
+			})
+		}
 	}
 }

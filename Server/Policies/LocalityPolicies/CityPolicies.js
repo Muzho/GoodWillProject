@@ -90,5 +90,35 @@ module.exports = {
 		} else {
 			next()
 		}
+	},
+	cityProperties (req, res, next) {
+		let cityErrors = []
+		const schema = {
+			cityID: Joi.number().integer().min(1).required(),
+			category: Joi.number().integer().min(1).required(),
+			type: Joi.number().integer().min(1).required()
+		}
+
+		const {error, value} = Joi.validate(req.params, schema)
+
+		if (error) {
+      switch (error.details[0].context.key) {
+				case 'cityID':
+					cityErrors.push('City identity error.')
+					break
+        case 'category':
+					cityErrors.push('Category identity error.')
+  				break
+				case 'type':
+					cityErrors.push('Type identity error.')
+			}
+			res.send({
+				success: false,
+				error_type: 0,
+				error: cityErrors
+			})
+		} else {
+			next()
+		}
 	}
 }

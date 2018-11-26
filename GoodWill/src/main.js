@@ -9,7 +9,11 @@ import Axios from 'axios'
 import VueCarousel from 'vue-carousel'
 import ECharts from 'vue-echarts/components/ECharts'
 import Bars from 'vuebars'
-// import Lingallery from 'lingallery'
+import Chartkick from 'chartkick'
+import VueChartkick from 'vue-chartkick'
+import 'chart.js'
+import 'hchs-vue-charts'
+import Trend from 'vuetrend'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
@@ -58,7 +62,6 @@ Vue.component('app-footer', Footer)
 Vue.component('app-breadcrumb', BreadCrumb)
 Vue.component('app-feedback', Messages)
 Vue.component('v-chart', ECharts)
-// Vue.component('lingallery', Lingallery)
 
 Vue.prototype.$http = Axios
 const token = localStorage.getItem('token')
@@ -67,6 +70,9 @@ if (token) {
 }
 
 Vue.use(Bars)
+Vue.use(Trend)
+Vue.use(window.VueCharts)
+Vue.use(VueChartkick, { Chartkick })
 Vue.use(VueCarousel)
 Vue.use(Vuetify, {
   components: {

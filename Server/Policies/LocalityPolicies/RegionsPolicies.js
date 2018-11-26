@@ -90,5 +90,28 @@ module.exports = {
 		} else {
 			next()
 		}
+	},
+	regionProperties (req, res, next) {
+		let regionErrors = []
+		const schema = {
+			regionID: Joi.number().integer().min(1).required()
+		}
+
+		const {error, value} = Joi.validate(req.params, schema)
+
+		if (error) {
+      switch (error.details[0].context.key) {
+				case 'regionID':
+					regionErrors.push('Region identity error.')
+					break
+			}
+			res.send({
+				success: false,
+				error_type: 0,
+				error: regionErrors
+			})
+		} else {
+			next()
+		}
 	}
 }

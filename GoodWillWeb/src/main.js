@@ -28,6 +28,9 @@ import {
   VForm,
   VTextField,
   VBreadCrumbs,
+  VDialog,
+  VExpansionPanel,
+  VCarousel,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -57,6 +60,9 @@ Vue.use(Vuetify, {
     VForm,
     VTextField,
     VBreadCrumbs,
+    VDialog,
+    VExpansionPanel,
+    VCarousel,
     transitions
   },
   theme: {

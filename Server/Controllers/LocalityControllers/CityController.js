@@ -1,5 +1,6 @@
 const errorHandler = require('../errorHandler')
 const db = require('../../config/config')
+const async = require('async')
 
 module.exports = {
 	async AddCity (req, res) {
@@ -154,6 +155,33 @@ module.exports = {
 				success: false,
 				error_type: 1,
 				message: 'An error occured while deleting city'
+			})
+		}
+	},
+	async cityProperties (req, res) {
+		const city = req.params.cityID
+		const category = req.params.category
+		const type = req.params.type
+		try {
+			let properties = []
+			// get all areas in a city
+			let areas = `SELECT ?? FROM ?? WHERE ?? = ?`
+			db.db.query(areas, ['Area_Id', 'area', 'AreaCity', city], (err, results) => {
+				if (err) throw err
+				let areas = []
+				for (i = 0; i < results.length; i++) {
+					areas.push(results[i].Area_Id)
+				}
+				res.send({
+					success: true,
+					areas: areas
+				})
+			})
+		} catch (error) {
+			res.send({
+				success: false,
+				error: error,
+				error_type: 3
 			})
 		}
 	}

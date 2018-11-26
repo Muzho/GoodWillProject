@@ -156,5 +156,52 @@ module.exports = {
 				error: 'An error occured while editing area: ' + error
 			})
 		}
+	},
+	async areaProperties (req, res) {
+		const area = req.params.areaID
+		const category = req.params.category
+		const type = req.params.type
+		try {
+			let properties = `SELECT ?? AS prop_id, ?? AS owner,
+			?? AS title, ?? AS img, ?? AS price,
+			?? AS location, ?? AS type, ?? AS category
+			FROM ?? INNER JOIN ?? ON ?? = ??
+			INNER JOIN ?? ON ?? = ??
+			INNER JOIN ?? ON ?? = ?? WHERE ?? = ? AND ?? = ? AND ?? = ?`
+			db.db.query(properties, ['property.Property_Id',
+			'property.PropertyOwner',
+			'property.PropertyName',
+			'property.propImage',
+			'property.PropertyPrice', 'area.AreaName',
+			'propertytype.PropertyTypeName', 'propertycategory.CategoryName',
+			'property', 'area',
+			'property.PropertyLocation', 'area.Area_Id', 'propertytype',
+			'property.PropertyType', 'propertytype.PropertyType_Id',
+			'propertycategory', 'property.PropertyCategory',
+			'propertycategory.PropertyCategory_Id', 'property.PropertyCategory', category,
+			 'property.PropertyType', type, 'property.PropertyLocation', area], (err, rows) => {
+				if (err) throw err
+
+				let locDetails = `SELECT ?? AS property, ?? AS area, ?? AS city,
+				?? AS region FROM ?? t1 INNER JOIN ?? t2 ON t1.PropertyLocation = t2.Area_Id
+				INNER JOIN ?? t3 ON t2.AreaCity = t3.City_Id
+				INNER JOIN ?? t4 ON t3.CityRegion = t4.Region_Id WHERE t1.PropertyLocation = ?`
+				db.db.query(locDetails, ['PropertyName', 'AreaName', 'CityName', 'RegionName',
+				'property', 'area', 'city', 'region', area], (err, result, fields) => {
+					if (err) throw err
+					res.send({
+						success: true,
+						properties: rows,
+						locDetails: result[0]
+					})
+				})
+			})
+		} catch (error) {
+			res.send({
+				success: false,
+				error: error,
+				error_type: 3
+			})
+		}
 	}
 }

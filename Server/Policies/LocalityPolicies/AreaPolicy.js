@@ -90,5 +90,35 @@ module.exports = {
 		} else {
 			next()
 		}
+	},
+	areaProperties (req, res, next) {
+		let areaErrors = []
+		const schema = {
+			areaID: Joi.number().integer().min(1).required(),
+			category: Joi.number().integer().min(1).required(),
+			type: Joi.number().integer().min(1).required()
+		}
+
+		const {error, value} = Joi.validate(req.params, schema)
+
+		if (error) {
+      switch (error.details[0].context.key) {
+				case 'areaID':
+					areaErrors.push('Area identity error.')
+					break
+        case 'category':
+					areaErrors.push('Category identity error.')
+  				break
+				case 'type':
+					areaErrors.push('Type identity error.')
+			}
+			res.send({
+				success: false,
+				error_type: 0,
+				error: areaErrors
+			})
+		} else {
+			next()
+		}
 	}
 }

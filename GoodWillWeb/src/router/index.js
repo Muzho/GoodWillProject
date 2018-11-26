@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/Views/Home/Home'
 import Accounts from '@/Views/Accounts/Accounts'
-import Developments from '@/Views/Developments/Developments'
+import Region from '@/Views/Region/Region'
+import City from '@/Views/City/city'
+import Area from '@/Views/Area/area'
 import Rent from '@/Views/Rent/Rent'
 import Sale from '@/Views/Sale/Sale'
 import SingleProp from '@/Views/SingleProp/SingleProp'
@@ -22,9 +24,19 @@ export default new Router({
       component: Accounts
     },
     {
-      path: '/Developments',
-      name: 'Developments',
-      component: Developments
+      path: '/Region/:regionID',
+      name: 'Region',
+      component: Region
+    },
+    {
+      path: '/City/:cityID',
+      name: 'City',
+      component: City
+    },
+    {
+      path: '/Area/:areaID',
+      name: 'Area',
+      component: Area
     },
     {
       path: '/Rent',

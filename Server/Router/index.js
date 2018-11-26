@@ -171,5 +171,14 @@ module.exports = (app) => {
 			AuthenticationController.changeUserPassword),
 		app.post('/changeUsername',
 			AuthenticationPolicy.changeUsername,
-			AuthenticationController.changeUsername)
+			AuthenticationController.changeUsername),
+		app.get('/areaProperties/:areaID/:category/:type',
+			AreaPolicy.areaProperties,
+			AreaController.areaProperties),
+		app.get('/cityProperties/:cityID/:category/:type',
+			CityPolicy.cityProperties,
+			CityController.cityProperties),
+		app.get('/regionProperties/:regionID',
+			RegionPolicy.regionProperties,
+			RegionController.regionProperties)
 }

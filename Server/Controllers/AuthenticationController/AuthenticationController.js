@@ -5,7 +5,7 @@ const randomCodes = require('../randomCodes')
 const bcrypt = require('bcrypt')
 
 function jwtSignUser (user) {
-	const ONE_WEEK = 60 * 60 * 24 * 7 // 604800
+	const ONE_WEEK = 604800 // 60 * 60 * 24 * 7
 	return jwt.sign(JSON.parse(JSON.stringify(user)), db.authentication.jwtSecret, {
 		expiresIn: ONE_WEEK
 	})
